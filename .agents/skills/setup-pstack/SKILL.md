@@ -5,7 +5,7 @@ description: Configure which models pstack uses per role. Detect available model
 
 # Setup pstack
 
-Write `.agents/pstack-models.md`, the shared model map that pstack skills read directly. A missing file or role falls back to the active harness's available models, so this is an override layer, not a requirement.
+Write `.agents/pstack-models.md`, the shared model map that pstack skills read directly.
 
 ## Steps
 
@@ -19,11 +19,11 @@ The default role-to-model mapping is the rule shape shown in step 5 below. If `.
 
 ### 3. Map and confirm
 
-Show every role with its current model, marking any real identifier not in the detected set as needing a choice. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto`; both mean to use the parent chat model. Prefer the harness's structured user-input tool when available. For panel roles (how critics, arena runners, architect runners, interrogate reviewers), one subagent runs per list entry, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects a model family different from the parent's when possible. `swarm workers` is the default for every worker unless a race assigns another model per arm.
+Show every role with its current model, marking any real identifier not in the detected set as needing a choice. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto`; both mean to use the parent chat model. Prefer the harness's structured user-input tool when available. For panel roles (arena runners, architect runners, interrogate reviewers), one subagent runs per list entry, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects a model family different from the parent's when possible. `swarm workers` is the default for every worker unless a race assigns another model per arm.
 
 ### 4. Validate
 
-Every real slug written must be in the detected set; `inherit-parent` and `auto` always pass. If a chosen real slug is not available, stop and ask again. A rule pointing at a model the user cannot use breaks every delegation that reads it.
+Every real slug written must be in the detected set. `inherit-parent` and `auto` always pass. If a chosen real slug is not available, stop and ask again.
 
 ### 5. Write the rule
 
@@ -40,7 +40,6 @@ judgment and prose: claude-fable-5-thinking-max
 hardest tasks: claude-fable-5-thinking-max
 how explorer: grok-4.6-fast-xhigh
 how explainer: claude-fable-5-thinking-max
-how critics: claude-fable-5-thinking-max, gpt-5.6-sol-max, grok-4.6-fast-xhigh, claude-opus-5-thinking-xhigh
 why investigators: grok-4.6-fast-xhigh
 why synthesizer: claude-fable-5-thinking-max
 reflect tooling: gpt-5.6-sol-max

@@ -9,7 +9,7 @@ The upstream package is built around Cursor plugin routes. This fork keeps the w
 ├── agents/                 named subagent definitions
 │   ├── comment-sicko.md
 │   └── poteto-agent.md
-├── skills/                 44 Agent Skills
+├── skills/                 46 Agent Skills
 │   ├── poteto-mode/
 │   ├── how/
 │   ├── why/
