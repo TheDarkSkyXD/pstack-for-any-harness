@@ -1,6 +1,6 @@
 ---
 name: setup-pstack
-description: Configure which models pstack uses per role. Detect available models and write the cross-harness `.agents/pstack-models.md` override file. Use for /setup-pstack, "configure pstack models", or changing pstack's model choices.
+description: Configure which models pstack uses per role and at what reasoning budget. Detect available models and write the cross-harness `.agents/pstack-models.md` override file. Use for /setup-pstack, "configure pstack models", "pstack budget", or changing pstack's model choices.
 ---
 
 # Setup pstack
@@ -15,9 +15,22 @@ Enumerate the model identifiers accepted by the active harness's delegation inte
 
 ### 2. Load current state
 
-The default role-to-model mapping is the rule shape shown in step 5 below. If `.agents/pstack-models.md` already exists, read it and treat its values as the current choices. Otherwise start from those defaults.
+The default role-to-model mapping is the rule shape shown in step 5 below. If `.agents/pstack-models.md` already exists, read it and treat its `# budget` line and role values as the current choices. Otherwise start from those defaults.
 
-### 3. Map and confirm
+### 3. Budget, map, and confirm
+
+**Ask for a budget.** Prefer the harness's structured user-input tool when available. Offer these four choices and name the current budget when the model map records one:
+
+- `unlimited`: keep default efforts, up to max.
+- `large`: xhigh reasoning.
+- `medium`: high reasoning.
+- `small`: medium reasoning.
+
+**Apply it.** Build the working table from the skill defaults on every run, preserving roles customized by model family, list membership or order, or alias (`inherit-parent`, `auto`). Do not carry over effort reductions from the previous budget when rebuilding default entries. `unlimited` leaves the rebuilt table's efforts unchanged. `large`, `medium`, and `small` set the effort token of every real identifier, including panel entries, to `xhigh`, `high`, or `medium`. The effort token is the last token, or the one before a trailing `fast`, on the ladder `max` > `xhigh` > `high` > `medium` > `low`.
+
+If the result is not detected, use the same model family's detected identifier with the highest effort at or below the target. Otherwise mark the role as needing a choice. For example, `small` maps `gpt-5.6-sol-max` to `gpt-5.6-sol-medium` only if that identifier is available. Do not invent effort suffixes for harnesses that expose reasoning separately or do not expose it; mark those roles for an explicit supported choice. Leave `inherit-parent` and `auto` unchanged.
+
+**Show the roles and confirm.**
 
 Show every role with its current model, marking any real identifier not in the detected set as needing a choice. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto`; both mean to use the parent chat model. Prefer the harness's structured user-input tool when available. For panel roles (arena runners, architect runners, interrogate reviewers), one subagent runs per list entry, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects a model family different from the parent's when possible. `swarm workers` is the default for every worker unless a race assigns another model per arm.
 
@@ -27,11 +40,12 @@ Every real slug written must be in the detected set. `inherit-parent` and `auto`
 
 ### 5. Write the rule
 
-Write `.agents/pstack-models.md` with one line per role, using the same labels poteto-mode uses. Overwrite the whole file so re-runs stay idempotent. Shape:
+Write `.agents/pstack-models.md` with a `# budget` line recording the chosen label and target effort, and one line per role, using the same labels poteto-mode uses. Overwrite the whole file so re-runs stay idempotent. The budget line records the requested preset; confirmed role values record any availability fallback or explicit override. Shape:
 
 ```
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
 # `inherit-parent` or `auto` uses the parent chat model. Alias entries in a panel list still count toward its fan-out.
+# budget: unlimited (max)
 feature, refactoring: grok-4.6-fast-xhigh
 bug-fix: gpt-5.6-sol-max
 perf-issue: gpt-5.6-sol-max

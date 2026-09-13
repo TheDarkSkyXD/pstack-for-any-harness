@@ -19,7 +19,7 @@ Run:
 /setup-pstack
 ```
 
-[`/setup-pstack`](../../.agents/skills/setup-pstack/SKILL.md) detects the models the active harness exposes, shows you each role (code delegates, judgment, and review panels), and asks what you want. It writes `.agents/pstack-models.md`, a model map every pstack skill reads.
+[`/setup-pstack`](../../.agents/skills/setup-pstack/SKILL.md) detects the models the active harness exposes, asks for a reasoning budget, shows you each role (code delegates, judgment, and review panels), and asks what you want. It writes `.agents/pstack-models.md`, a model map every pstack skill reads, including the chosen budget.
 
 You only override what you care about. A role with no line in the rule keeps the skill's default. To restore a default later, delete that role's line, or just run `/setup-pstack` again.
 

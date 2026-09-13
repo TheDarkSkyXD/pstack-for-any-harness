@@ -27,7 +27,7 @@ Named pstack subagents live under `.agents/agents`. Skills reference those files
 
 ## Get started
 
-1. Invoke `setup-pstack` or ask the agent to configure pstack's model roles. It detects models exposed by the active harness and writes `.agents/pstack-models.md`.
+1. Invoke `setup-pstack` or ask the agent to configure pstack's model roles. It detects models exposed by the active harness, asks you to pick a reasoning budget and confirm the models, and writes `.agents/pstack-models.md`.
 2. Invoke `poteto-mode` for a non-trivial task. Describe the outcome and how to prove it.
 
 For example:
