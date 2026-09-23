@@ -25,7 +25,7 @@ Resolve what is in scope vs explicitly out, technical or platform constraints, p
 Delegate codebase exploration (the **guard-the-context-window** principle skill).
 
 - Prefer the agent definition at `.agents/agents/poteto-agent.md`. A general-purpose subagent is the fallback. Do not use a harness-specific planning agent that bypasses this skill.
-- Pass `model:` explicitly per the configured roles (defaults `grok-4.6-fast-xhigh` for code, `claude-fable-5-thinking-max` for judgment).
+- Pass `model:` explicitly per the configured roles (defaults `grok-4.7-xhigh-fast` for code, `claude-opus-5-5-max` for judgment).
 
 Each explorer returns file pointers, conventions, dependencies, test infrastructure, and entry points. No inlined dumps.
 
@@ -89,6 +89,8 @@ Each phase needs both:
 - No control skill for the touched surface: flag it in the plan.
 
 For bug fixes, the loop is reproduce on the surface, fix, verify on the same surface. Unit tests show a branch behaves a certain way; they do not prove the bug is gone (the **prove-it-works** principle skill).
+
+For PR work, begin an independent verification round at the code-ready head SHA and each later push that changes the patch. Run the repository's pre-review checks on the committed head before a push starts a round. Each round covers gates, live behavior, performance where relevant, and at least two focused diff-and-receipt audit lanes. Record the exact SHA and what each lane exercised. Include a regression lane against trunk; if trunk lacks the feature, record that and verify the added behavior and expected end state. Fold every proven finding, including defects filed as notes, into one fix-forward and the next round's brief. Preserve earlier lane results only when the patch-id rule in `playbooks/shipping.md` says they remain valid.
 
 ## 6. Implementation guidance
 

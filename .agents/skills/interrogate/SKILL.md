@@ -32,14 +32,13 @@ Write one clear paragraph. If you're unsure about the intent, ask the user befor
 
 ## Step 3, Spawn Reviewers
 
-Launch all reviewers together through the active harness's delegation interface. Use the `interrogate reviewers` list from `.agents/pstack-models.md` when present, one reviewer per entry, extending or shrinking the Reviewer A/B/C/D labels below to the configured entry count. Otherwise use the table defaults.
+Launch all reviewers together through the active harness's delegation interface. Use the `interrogate reviewers` list from `.agents/pstack-models.md` when present, one reviewer per entry, extending or shrinking the Reviewer A/B/C labels below to the configured entry count. Otherwise use the table defaults.
 
 | Subagent | Default model |
 |----------|---------------|
-| Reviewer A | `claude-fable-5-thinking-max` |
+| Reviewer A | `claude-opus-5-5-max` |
 | Reviewer B | `gpt-5.6-sol-max` |
-| Reviewer C | `grok-4.6-fast-xhigh` |
-| Reviewer D | `claude-opus-5-thinking-xhigh` |
+| Reviewer C | `grok-4.7-xhigh-fast` |
 
 For each reviewer:
 - Worker: general-purpose subagent through the active harness's delegation interface

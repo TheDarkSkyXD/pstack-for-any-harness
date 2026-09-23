@@ -28,7 +28,7 @@ The default role-to-model mapping is the rule shape shown in step 5 below. If `.
 
 **Apply it.** Build the working table from the skill defaults on every run, preserving roles customized by model family, list membership or order, or alias (`inherit-parent`, `auto`). Do not carry over effort reductions from the previous budget when rebuilding default entries. `unlimited` leaves the rebuilt table's efforts unchanged. `large`, `medium`, and `small` set the effort token of every real identifier, including panel entries, to `xhigh`, `high`, or `medium`. The effort token is the last token, or the one before a trailing `fast`, on the ladder `max` > `xhigh` > `high` > `medium` > `low`.
 
-If the result is not detected, use the same model family's detected identifier with the highest effort at or below the target. Otherwise mark the role as needing a choice. For example, `small` maps `gpt-5.6-sol-max` to `gpt-5.6-sol-medium` only if that identifier is available. Do not invent effort suffixes for harnesses that expose reasoning separately or do not expose it; mark those roles for an explicit supported choice. Leave `inherit-parent` and `auto` unchanged.
+If the result is not detected, use the same model family's detected identifier with the highest effort at or below the target. Otherwise mark the role as needing a choice. For example, `small` maps `claude-opus-5-5-max` to `claude-opus-5-5-medium`, and `grok-4.7-xhigh-fast` to `grok-4.7-medium-fast`, only if those identifiers are available. Do not invent effort suffixes for harnesses that expose reasoning separately or do not expose it; mark those roles for an explicit supported choice. Leave `inherit-parent` and `auto` unchanged.
 
 **Show the roles and confirm.**
 
@@ -46,23 +46,23 @@ Write `.agents/pstack-models.md` with a `# budget` line recording the chosen lab
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
 # `inherit-parent` or `auto` uses the parent chat model. Alias entries in a panel list still count toward its fan-out.
 # budget: unlimited (max)
-feature, refactoring: grok-4.6-fast-xhigh
-bug-fix: gpt-5.6-sol-max
-perf-issue: gpt-5.6-sol-max
-hillclimb: gpt-5.6-sol-max
-judgment and prose: claude-fable-5-thinking-max
-hardest tasks: claude-fable-5-thinking-max
-how explorer: grok-4.6-fast-xhigh
-how explainer: claude-fable-5-thinking-max
-why investigators: grok-4.6-fast-xhigh
-why synthesizer: claude-fable-5-thinking-max
+feature, refactoring: grok-4.7-xhigh-fast
+bug-fix: grok-4.7-xhigh-fast
+perf-issue: grok-4.7-xhigh-fast
+hillclimb: grok-4.7-xhigh-fast
+judgment and prose: claude-opus-5-5-max
+hardest tasks: claude-opus-5-5-max
+how explorer: grok-4.7-xhigh-fast
+how explainer: claude-opus-5-5-max
+why investigators: grok-4.7-xhigh-fast
+why synthesizer: claude-opus-5-5-max
 reflect tooling: gpt-5.6-sol-max
-reflect judgment, divergent, synthesizer: claude-fable-5-thinking-max
-arena runners: claude-fable-5-thinking-max, gpt-5.6-sol-max, grok-4.6-fast-xhigh, claude-opus-5-thinking-xhigh
-arena cross-judge pool: claude-fable-5-thinking-max, gpt-5.6-sol-max, grok-4.6-fast-xhigh, claude-opus-5-thinking-xhigh
-swarm workers: grok-4.6-fast-xhigh
-architect runners: claude-fable-5-thinking-max, gpt-5.6-sol-max, grok-4.6-fast-xhigh, claude-opus-5-thinking-xhigh
-interrogate reviewers: claude-fable-5-thinking-max, gpt-5.6-sol-max, grok-4.6-fast-xhigh, claude-opus-5-thinking-xhigh
+reflect judgment, divergent, synthesizer: claude-opus-5-5-max
+arena runners: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
+arena cross-judge pool: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
+swarm workers: grok-4.7-xhigh-fast
+architect runners: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
+interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
 ```
 
 ### 6. Confirm
