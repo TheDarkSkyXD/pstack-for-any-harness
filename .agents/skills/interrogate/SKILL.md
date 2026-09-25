@@ -32,7 +32,7 @@ Write one clear paragraph. If you're unsure about the intent, ask the user befor
 
 ## Step 3, Spawn Reviewers
 
-Launch all reviewers together through the active harness's delegation interface. Use the `interrogate reviewers` list from `.agents/pstack-models.md` when present, one reviewer per entry, extending or shrinking the Reviewer A/B/C labels below to the configured entry count. Otherwise use the table defaults.
+Launch all reviewers together through the active harness's delegation interface. Use the `interrogate reviewers` line in `.agents/pstack-models.md`, one reviewer per entry, extending or shrinking the Reviewer A/B/C labels below to the configured entry count. If the model map or line is missing, use the table defaults.
 
 | Subagent | Default model |
 |----------|---------------|
@@ -45,7 +45,7 @@ For each reviewer:
 - `model`: the configured `interrogate reviewers` entry, or the table default with no configured line
 - `readonly`: `true`
 
-If a model identifier is rejected, inspect the valid identifiers reported by the active harness, pick the closest equivalent (prefer the highest-reasoning tier of the same family), spawn with the valid identifier, and open a separate PR to update the configured value or default table. Do not block the review on the identifier issue. If the configured value is `inherit-parent` or `auto`, omit the model override. Never treat those aliases as broken identifiers.
+For `auto` or `inherit-parent`, omit `model` so the reviewer runs on the parent model. If the active harness rejects a configured entry, run that reviewer on the table default of its family and say so. Families go by prefix: `claude-*`, `gpt-*`, and `grok-*`. With no family match, use Reviewer A's default. If the harness rejects a table default, inspect its valid identifiers, pick the closest equivalent (prefer the highest-reasoning tier of the same family), spawn with it, and open a separate PR to update the default table. Do not block the review on the identifier issue. Never treat an alias as a rejected identifier or apply either fallback to it.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent

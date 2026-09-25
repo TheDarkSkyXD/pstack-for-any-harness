@@ -15,7 +15,7 @@ Enumerate the model identifiers accepted by the active harness's delegation inte
 
 ### 2. Load current state
 
-The default role-to-model mapping is the rule shape shown in step 5 below. If `.agents/pstack-models.md` already exists, read it and treat its `# budget` line and role values as the current choices. Otherwise start from those defaults.
+The default role-to-model mapping is the rule shape shown in step 5 below. If `.agents/pstack-models.md` already exists, read it and treat its `# budget` line and role values as the current choices. Otherwise start from those defaults. Drop any role line not present in step 5 because it belongs to a retired role.
 
 ### 3. Budget, map, and confirm
 
@@ -32,7 +32,7 @@ If the result is not detected, use the same model family's detected identifier w
 
 **Show the roles and confirm.**
 
-Show every role with its current model, marking any real identifier not in the detected set as needing a choice. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto`; both mean to use the parent chat model. Prefer the harness's structured user-input tool when available. For panel roles (arena runners, architect runners, interrogate reviewers), one subagent runs per list entry, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects a model family different from the parent's when possible. `swarm workers` is the default for every worker unless a race assigns another model per arm.
+Show every role with its current model, marking any real identifier not in the detected set as needing a choice. Also list any role lines dropped as retired. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto`; both mean to use the parent chat model. Prefer the harness's structured user-input tool when available. For panel roles (arena runners, architect runners, interrogate reviewers), one subagent runs per list entry, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects a model family different from the parent's when possible. `swarm workers` is the default for every worker unless a race assigns another model per arm.
 
 ### 4. Validate
 
