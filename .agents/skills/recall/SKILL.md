@@ -5,6 +5,10 @@ description: "Reconstruct your recent working context from your own chat history
 
 # Recall
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 **Before you start or resume work, you rebuild the user's recent working context and hand back a tight capsule of where things stand now and what to do next.**
 
 Keep it tight and on-topic. Read only what the in-scope threads need, then stop.
@@ -12,6 +16,8 @@ Keep it tight and on-topic. Read only what the in-scope threads need, then stop.
 Your context lives in two records. Your own chat history holds what you did and decided. The shared record holds everything that happened around the same code under other names: the symptoms users keep reporting, the fixes that shipped and got reverted, the errors still firing in prod. That second record is what the **why** skill searches, across source control, the issue tracker, chat and issue channels, long-form docs, and error tracking. A feature with a long bug tail keeps most of its story there, so don't reconstruct it from your transcripts alone.
 
 Use the active harness's workspace-scoped transcript or conversation-history interface. Never guess a global transcript path or search another workspace. If the harness does not expose transcripts, say so and continue with live repository and shared-record evidence.
+
+Before saying a decision was never recorded, search every durable record named by project instructions within the authorized scope. Preserve attributable original human rulings separately from agent interpretations. Copied summaries are one evidence chain, not independent corroboration. If the original is unavailable, label its exact wording and scope uncertain.
 
 1. Classify, then route. One specific prior chat to resume is the `session-pickup` playbook, not this. Turning habits into a durable skill is `automate-me`. A human-readable summary of your work is a different task. Recall loads working context across recent chats before you act. If the user already gave you a full state capsule (paths, branch, the change), use it and skip the mining.
 2. Lock the scope before searching. Pin the window ("recent" is a real range, default the last 7 days), the topic if named, and the workspace (default the active one. Never read another project's transcripts without being asked). State the scope back. Never quietly turn "all" into "recent N".

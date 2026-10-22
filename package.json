@@ -1,0 +1,10 @@
+{
+  "name": "pstack-for-any-harness",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "check": "node scripts/check-portability.mjs && node scripts/skill-inventory.mjs --check",
+    "test": "node --test scripts/install.test.mjs scripts/workflow.test.mjs"
+  }
+}

@@ -2,7 +2,7 @@
 
 **You own the skill's voice.**
 
-1. Use the active harness's skill-authoring guidance and write the skill to `.agents/skills/<skill-name>/SKILL.md`.
+1. Use the active harness's skill-authoring guidance when available. Otherwise follow the Agent Skills format: a `SKILL.md` with `name` and `description`, task-specific instructions, and supporting files linked where needed. Preserve the user's invocation preferences.
 2. Validate the skill: frontmatter has `name` and `description`, referenced files exist, cross-skill links resolve.
 3. Test cases if structural. Skip if subjective.
 4. Run **Opening a PR**.

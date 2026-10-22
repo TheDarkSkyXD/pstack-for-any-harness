@@ -14,6 +14,7 @@ Apply the **type-system-discipline** principle skill first.
 | Constructive modeling | Build the shape so the illegal value can't be constructed. `[T, ...T[]]` for non-empty, `[T, T][]` for even length, `start` plus `duration` for a range. Not a runtime guard, not a wish for refinement types. |
 | Simplest total type | Keep `T[]` while every operation on it stays total. Strengthen to `NonEmpty<T>` only where the loose type forces `!`, a cast, or a "should never happen" throw. |
 | `unknown` over `any` | External data is `unknown`. |
+| Schemas before guards | Use the repository's existing runtime schema library and infer the type from that schema before hand-writing property guards or a duplicate interface. |
 | No `as` casts | Every `as` is a runtime crash waiting. Cast only after validation. |
 | Narrowing hierarchy | Discriminant switch > `in` operator > `typeof`/`instanceof` > user-defined type guard > `as`. |
 | Type guards | Must verify the claim. A lying guard is worse than `as` because the bug hides behind a name that says it's safe. Name them `isX` or `hasX`. |

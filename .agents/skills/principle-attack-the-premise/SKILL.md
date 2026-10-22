@@ -5,6 +5,8 @@ description: "Apply when two or more fixes that share one premise have failed th
 
 # Attack the Premise
 
+Write down the shared premise and design a direct attempt to falsify it before choosing another fix. For imbalances, keep the per-actor census and assignment investigation below; a global aggregate cannot identify which actor holds the imbalance.
+
 When two or more fixes that share one premise have failed the same gate, suspect the premise, not the fixes.
 
 **Why:** Each failure under a shared premise is evidence about the premise.

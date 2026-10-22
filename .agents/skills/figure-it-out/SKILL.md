@@ -5,6 +5,10 @@ description: "Design an auditable playbook when no narrower one fits: a large mi
 
 # Figure it out
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 When the task matches no playbook, design one. The deliverable before any code is the workflow itself: a sequence of phases that scales rigor to the task, runs the scientific method, and leaves a decision trail a human can audit after stepping away.
 
 ## Start

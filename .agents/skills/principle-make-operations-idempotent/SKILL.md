@@ -5,6 +5,8 @@ description: "Apply when designing commands, lifecycle steps, or processing loop
 
 # Make Operations Idempotent
 
+Derive each action from observed current state. After an interruption at any step, recognize partial artifacts and converge toward the same completed state. A prior attempt or cached success marker is not evidence that the desired state currently exists.
+
 Design operations so they converge to the correct state regardless of how many times they run or where they start from. Every state-mutating operation should answer: "What happens if this runs twice? What happens if the previous run crashed halfway?"
 
 **Why:** Commands, lifecycle operations, and processing loops run where crashes, restarts, and retries are normal. If partial state changes the next run's outcome, every restart becomes a debugging session.

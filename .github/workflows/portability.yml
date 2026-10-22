@@ -1,0 +1,24 @@
+name: Portability
+on: [push, pull_request]
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run check
+      - run: npm test
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.11
+      - run: bun install --frozen-lockfile
+        working-directory: .agents/skills/poteto-mode/scripts
+      - run: bun run typecheck
+        working-directory: .agents/skills/poteto-mode/scripts
+      - run: bun run test
+        working-directory: .agents/skills/poteto-mode/scripts

@@ -16,6 +16,7 @@ When the work isn't trivial, build the tool that does it instead of doing it by 
 - When you fan work out to subagents, write the lever as a skill they all read: the recipe, the verification contract, and the do-not-touch fences in one artifact. Keep it outside the delegates' write scope so they can't quietly edit the contract.
 - Applying this principle produces a file. If you cited it and there is no codemod, script, generator, or delegate skill in the diff, you didn't apply it.
 - Commit the lever when the work outlives the session.
+- Prove a comparison tool can reject deliberately broken input for every dimension it claims to compare. Missing required input must produce a refusal or an inconclusive result, never a pass.
 
 **Balance:** The bar is triviality, not repetition. A one-off still earns a lever when the lever is what makes the work checkable. Per the [Laziness Protocol](../principle-laziness-protocol/SKILL.md), build the smallest script that does or proves the job, never a framework.
 

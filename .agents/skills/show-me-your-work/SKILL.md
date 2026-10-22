@@ -5,6 +5,10 @@ description: "Keep a reviewable decision trail for long-running or unattended wo
 
 # Show me your work
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 Keep one canonical log.
 
 ## The format
@@ -34,11 +38,11 @@ ts	phase	decision	why	evidence	result
 
 Write each entry the way you'd tell a teammate what you did. Plain words, concrete actions, no AI speak or abstract jargon (the **unslop** skill applies to log text too).
 
-Use the helper `scripts/log.sh <logfile> <phase> <decision> <why> <evidence> <result>`. It stamps `ts`, writes the header on first use, strips stray tabs/newlines, and prefixes any cell starting with `=`, `+`, `-`, or `@` with a single quote. A bare `printf` appending a row works too, but mind those same bytes if cells come from generated or user-supplied text.
+Use the helper `scripts/log.sh <logfile> <phase> <decision> <why> <evidence> <result>`. It stamps `ts`, writes the header on first use, strips stray tabs/newlines, and prefixes any cell starting with `=`, `+`, `-`, `@`, or `"` with a single quote. A bare `printf` appending a row works too, but mind those same bytes if cells come from generated or user-supplied text.
 
 Log decision points and checkpoints, not every action: a fork chosen, a unit completed with its verification result, a pivot or revert with its trigger, a blocker surfaced, a gate fixed. For loop runs, one row per iteration. Skip the trivial and self-evident.
 
-A run is one agent conversation, including later turns and any summary of it. A pickup, replacement agent, or new chat starts a new run. When a run adds to a log that already has rows, its first row has phase `start`; use the same marker when a run resumes after another run appended to the log. Before appending, read the last rows to see whether another run wrote since. A `start` row names the timestamp range of prior rows this run did not write, and its evidence identifies this run, such as its agent id. Use phase `start` for nothing else.
+A run is one agent conversation, including its later turns and any summary of it. A pickup, a replacement agent, or a new chat starts a new run. When a run adds to a log that already has rows, its first row has phase `start`, and so does its first row after another run's `start` row. So a run that comes back to a log in a later turn first reads the log's last rows to see whether another run wrote since. A `start` row names the `ts` range of the rows before it that this run did not write, and its evidence names this run, such as its agent id. Use phase `start` for nothing else.
 
 ## Where it lives
 
@@ -53,17 +57,17 @@ Commit it only when the work is ambitious enough that a reviewer needs the trail
 
 ## Audit the log against the transcript
 
-At the end of the run, before handing back, check the log told the truth. Use the active harness's workspace-scoped transcript or conversation-history interface; never search another workspace. Walk this run's rows against what actually happened. Its stretch begins at this run's `start` row, or at the first row if this run created the log, and ends at the next `start` row from another run:
+At the end of the run, audit every interleaved stretch of rows belonging to this conversation against its workspace-scoped transcript or visible history. Never inspect unrelated sessions. Each stretch starts at this run's start marker and ends at the next other run's marker; do not audit another run's rows. If transcript access is missing, audit against visible tool results and label the coverage gap.
 
 - Check that every row maps to a real decision or action.
 - Check that each row's evidence resolves and shows what the row claims.
 - A fork, pivot, or abandoned approach that shaped the work but isn't logged is a gap. Add it.
 
-Correct the log, not the story. The audit never edits or removes a row, even an invented one. If a row records neither a real decision nor a real action, or its claim or evidence is wrong, append a row that supersedes it with what actually happened and a resolving pointer. Do not audit rows outside this run's stretches unless this run's work shows one is wrong; supersede that row too.
+Correct the log, not the story. The audit never edits or removes a row, even an invented one. When a row records neither a real decision nor a real action, or its claim or evidence is wrong, add a row that supersedes it with what actually happened and a pointer that resolves. This audit does not check rows outside this run's stretches. If this run's own work shows one of them is wrong, supersede it like any wrong call.
 
 ## Cross-model review of the trail
 
-Before handing back, spawn a subagent on a different model family from the one that did the work. Self-review is not a substitute. The subagent reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky.
+Before handing back, spawn a subagent on a different model family from the one that did the work. Self-review is not a substitute. The subagent reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky. Pick each subagent's reasoning level for the job, per the Subagents section of the **poteto-mode** skill.
 
 - Decisions logged with weak or absent evidence.
 - Verification steps skipped or claimed without proof in the transcript.

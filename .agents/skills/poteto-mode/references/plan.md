@@ -25,15 +25,19 @@ Resolve what is in scope vs explicitly out, technical or platform constraints, p
 Delegate codebase exploration (the **guard-the-context-window** principle skill).
 
 - Prefer the agent definition at `.agents/agents/poteto-agent.md`. A general-purpose subagent is the fallback. Do not use a harness-specific planning agent that bypasses this skill.
-- Pass `model:` explicitly per the configured roles (defaults `grok-4.7-xhigh-fast` for code, `claude-opus-5-5-max` for judgment).
+- Resolve configured model roles through `harness.md`. With no override, inherit the current session model and omit `model` when the interface permits.
 
 Each explorer returns file pointers, conventions, dependencies, test infrastructure, and entry points. No inlined dumps.
+
+Use fresh explorers and fresh owners for each new task or fix round, per poteto-mode's Subagents section. Consolidate the original brief, later directives, and prior reports. Reuse an agent only when the work needs costly state it still holds.
 
 ## 4. Write the plan
 
 The user specifies where the plan lives.
 
-Single file `NN-slug.md` for small plans. For three or more phases, a directory with `overview.md` plus phase files:
+For a multi-PR execution program, use [program-checklist.md](program-checklist.md). Keep its headings and sub-blocks in order. It includes the hourly audit, the tick prompt, and PR mechanics that prefer the active harness's built-in PR tool. Choose Autopilot-full for independent work with landing authority, Autopilot-stack for coupled work or operator landing, and Orchestrate for a standing program. Do not arm a persistent goal as part of the program. Arm the recurring hourly audit only when execution is authorized.
+
+For plans outside a multi-PR execution program, use a single file `NN-slug.md` for small plans. For three or more phases, use a directory with `overview.md` plus phase files:
 
 ```
 NN-slug/
@@ -90,7 +94,7 @@ Each phase needs both:
 
 For bug fixes, the loop is reproduce on the surface, fix, verify on the same surface. Unit tests show a branch behaves a certain way; they do not prove the bug is gone (the **prove-it-works** principle skill).
 
-For PR work, begin an independent verification round at the code-ready head SHA and each later push that changes the patch. Run the repository's pre-review checks on the committed head before a push starts a round. Each round covers gates, ten live lanes using the `swarm workers` role from `.agents/pstack-models.md` (default `grok-4.7-xhigh-fast`), performance where relevant, and at least two focused diff-and-receipt audit lanes. Record the exact SHA and what each lane exercised. Include a regression lane against trunk; if trunk lacks the feature, record that and verify the added behavior and expected end state. Fold every proven finding, including defects filed as notes, into one fix-forward and the next round's brief. Preserve earlier lane results only when the patch-id rule in `playbooks/shipping.md` says they remain valid.
+For PR work, begin an independent verification round at the code-ready head SHA and each later push that changes the patch. Run the repository's pre-review checks on the committed head before a push starts a round. Each round covers gates, ten live lanes using the `swarm workers` role from `.agents/pstack-models.md` (default `inherit-parent`), performance where relevant, and at least two focused diff-and-receipt audit lanes. Record the exact SHA and what each lane exercised. Include a regression lane against trunk; if trunk lacks the feature, record that and verify the added behavior and expected end state. Fold every proven finding, including defects filed as notes, into one fix-forward and the next round's brief. Preserve earlier lane results only when the patch-id rule in `playbooks/shipping.md` says they remain valid.
 
 ## 6. Implementation guidance
 
@@ -103,5 +107,7 @@ In the overview, name which poteto-mode non-negotiables the implementer must app
 - The pstack Babysit playbook after opening the PR.
 
 ## 7. Hand back
+
+For a multi-PR program, run `node .agents/skills/poteto-mode/scripts/check-plan.mjs <plan.md>` and fix every reported problem. Include the checker's output with the plan path.
 
 Summarize phases, scope boundaries, applicable skills, and verification. Stop. The user decides when implementation starts.

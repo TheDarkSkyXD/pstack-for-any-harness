@@ -15,6 +15,8 @@ When debugging, do not fix symptoms. Trace every problem to its root cause and f
 - Do not add guards (adding a nil check to silence a crash is a symptom fix)
 - If a workaround needs a paragraph-long comment to justify it, the code is wrong (fix the code, not the comment)
 - Check for the pattern, not just the instance (grep for the same pattern, fix all instances)
+- Distinguish a legitimate state that needs handling from an impossible state produced by a broken invariant. Fix the producer of an impossible state instead of adding a guard that hides it.
+- When the cause was difficult to find, add the cheapest diagnostic signal that would have exposed it, without logging credentials or unrelated user data.
 - When stuck, instrument. Don't guess (add logging, read the actual error)
 
 **Restart bugs: suspect state before code**

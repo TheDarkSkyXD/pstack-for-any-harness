@@ -4,7 +4,7 @@ In this page you add the shared agent bundle to a project, pick which models pst
 
 ## Add pstack to a project
 
-Copy this repository's `.agents` directory into the root of the project where you want to use pstack. Keep its two canonical roots intact:
+Run `node scripts/install.mjs --target "/path/to/project" --harness all` from a clone of this repository. The [installation guide](../installation.md) covers individual profiles and custom instruction paths. Keep the bundle's two canonical roots intact:
 
 - `.agents/skills/` contains discoverable skills.
 - `.agents/agents/` contains named subagent definitions referenced by those skills.
@@ -19,7 +19,7 @@ Run:
 /setup-pstack
 ```
 
-[`/setup-pstack`](../../.agents/skills/setup-pstack/SKILL.md) detects the models the active harness exposes, asks for a reasoning budget, shows you each role (code delegates, judgment, and review panels), and asks what you want. It writes `.agents/pstack-models.md`, a model map every pstack skill reads, including the chosen budget.
+Setup is optional. Without a model map, every role inherits the current session's model. [`/setup-pstack`](../../.agents/skills/setup-pstack/SKILL.md) detects the models and reasoning options the active delegation service exposes, shows you each role, and writes confirmed choices to `.agents/pstack-models.md`. It does not guess model IDs or append effort suffixes to them.
 
 You only override what you care about. A role with no line in the rule keeps the skill's default. To restore a default later, delete that role's line, or just run `/setup-pstack` again.
 

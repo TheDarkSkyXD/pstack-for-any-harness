@@ -1,19 +1,23 @@
 ---
 name: automate-me
-description: "Use for \"automate me\", \"create/update/refresh my -mode skill\", \"turn/capture my preferences or working style into a skill\", or wanting agents to follow how the user works. Drafts or revises a personal -mode skill via create-skill + unslop, optionally pulling fresh evidence from recent transcripts."
+description: "Use for \"automate me\", \"create/update/refresh my -mode skill\", \"turn/capture my preferences or working style into a skill\", or wanting agents to follow how the user works. Drafts or revises a personal -mode skill with the active harness's authoring guidance and unslop, optionally pulling fresh evidence from recent transcripts."
 ---
 
 # Automate me
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 A guided flow for turning the user's working conventions into a skill agents will follow. The output is one `-mode` skill tailored to them (e.g. `jay-mode`, `priya-mode`).
 
-This skill orchestrates three parts: an inline mining pass (see step 1), the active harness's skill-authoring guidance, and `.agents/skills/unslop/SKILL.md` for prose discipline. It sequences them. It doesn't replace them.
+Mine preferences, use the active harness's authoring guidance, and apply **unslop**. If no authoring guide is installed, use the Agent Skills format and validate the result.
 
 ## Flow
 
 ### 0. Check for an existing skill
 
-Look recursively for `.agents/skills/*-mode/SKILL.md` matching the user's handle. If one exists, confirm intent with the harness's user-input mechanism unless the user already said "update my skill" or similar:
+Look recursively for project-local `.agents/skills/**/*-mode/SKILL.md` and any user skill directories explicitly exposed by the active harness. Match the user's handle and preserve an existing category. If the user has not already requested an update, confirm whether to update that skill or create another.
 
 - Update the existing skill (default for repeat runs)
 - Start fresh (rare, ask why before doing it)
@@ -25,9 +29,9 @@ Update mode changes the rest of the flow:
 
 ### 1. Mine their history
 
-Locate the active workspace's transcripts before fanning out. Use the path exposed by the active harness and never search transcript directories outside the active workspace.
+Locate transcripts through the active harness's workspace-scoped history interface. Use only sessions in the authorized workspace. If history is unavailable, use the visible conversation and label the missing evidence.
 
-Survey recent agent conversations within that scope for recurring patterns. Run multiple parallel subagents across slices of history (e.g. last 2-4 weeks, split into 3 slices so each has enough material). Each slice mining subagent reads transcripts from the workspace-scoped path the parent provides, looks for the signals below, and returns a short structured list of patterns it saw with evidence pointers. Default signals worth hunting:
+Survey recent agent conversations within that scope for recurring patterns. Run multiple parallel subagents across slices of history (e.g. last 2-4 weeks, split into 3 slices so each has enough material). Pick each subagent's reasoning level for the job, per the Subagents section of the **poteto-mode** skill. Each slice mining subagent reads transcripts from the workspace-scoped path the parent provides, looks for the signals below, and returns a short structured list of patterns it saw with evidence pointers. Default signals worth hunting:
 
 - Response preferences (length, tone, format, "dumb it down" corrections)
 - Delegation habits (subagents, models, specialized workflows, parallelism)
@@ -40,7 +44,7 @@ Cross-check across slices before elevating a signal. Patterns seen in 2+ slices 
 
 ### 2. Ask the user directly
 
-Mining misses intent that hasn't come up yet. Use the harness's structured user-input tool when available rather than asking the user to type from scratch.
+Mining misses intent that hasn't come up yet. Use the the harness's question interface tool (structured multi-choice) rather than asking the user to type from scratch.
 
 Shape: one or two questions with 4-6 options each, `allow_multiple: true` for category questions. Start broad ("Which areas matter most?"), then follow up on selected areas with specific options. After the structured rounds, one free-form chat question catches anything the options missed.
 
@@ -65,15 +69,15 @@ The **poteto-mode** skill shows the shape. Read it for granularity. Don't copy i
 
 Use the active harness's skill-authoring guidance to author the skill. Placement:
 
-- Path: preserve an existing skill's location. For a new mode, use `.agents/skills/<handle>-mode/SKILL.md`; the folder name must match the frontmatter `name`.
+- Path: preserve an existing mode skill's category. For a new mode, use `.agents/skills/<handle>/<handle>-mode/SKILL.md` when the repo has an established personal category for that handle. Otherwise default to `.agents/skills/<handle>-mode/SKILL.md` in the project .
 - Handle: the user's first name or chosen identifier.
 - Frontmatter `description`: trigger on their name + `/<handle>-mode` + "work in their style", not on generic keywords like "write code" or "review PR".
-- Frontmatter formatting: follow `create-skill`'s YAML rules. Keep `description` as one YAML scalar. Quote it or use `description: >-` with indented continuation lines when punctuation or wrapping requires it.
-- Triggering: make the description specific to the user's name, slash command, and requests to work in their style. Do not add harness-specific frontmatter fields.
+- Frontmatter formatting: follow the harness's skill-authoring YAML rules. Keep `description` as one YAML scalar. Quote it or use `description: >-` with indented continuation lines when punctuation or wrapping requires it.
+- Preserve the existing invocation policy. Keep automatic discovery enabled for a new skill unless the user explicitly asks for explicit-only invocation.
 
 ### 5. Iterate on prose
 
-Apply the **unslop** skill and `create-skill`'s writing guidelines to every line.
+Apply the **unslop** skill and the harness's skill-authoring writing guidelines to every line.
 
 Show the draft to the user and take feedback. Expect multiple iterations. Cut ruthlessly. A mode skill is not a manual.
 
@@ -92,11 +96,11 @@ Work in a worktree off main. Commit and open a PR. Don't push to main directly.
 
 ## Evaluation
 
-A `-mode` skill is subjective output. A `create-skill`-style test/iterate benchmark loop isn't useful here. Vibe-check with the user: does it read like them? Did it miss anything? Then ship.
+A `-mode` skill is subjective output. A behavioral test/iterate benchmark loop isn't useful here. Vibe-check with the user: does it read like them? Did it miss anything? Then ship.
 
 Run a description-optimization loop only if the skill's trigger accuracy turns out to be a problem in practice.
 
 ## When not to use
 
-- User wants a task-specific skill (not working conventions): `create-skill` alone, no mining required.
+- User wants a task-specific skill (not working conventions): the active harness's authoring guidance, no mining required.
 - User wants to capture one narrow workflow (e.g. "how I write commit messages"). That's a regular skill, not a mode skill.

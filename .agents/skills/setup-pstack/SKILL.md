@@ -5,70 +5,60 @@ description: Configure which models pstack uses per role and at what reasoning b
 
 # Setup pstack
 
-Write `.agents/pstack-models.md`, the shared model map that pstack skills read directly.
+## Runtime
 
-## Steps
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
 
-### 1. Detect available models
+Write `.agents/pstack-models.md`, the shared model map that pstack skills read directly. Setup is optional. Without a model map, every role inherits the current session model.
 
-Enumerate the model identifiers accepted by the active harness's delegation interface. Prefer a harness-provided models API or CLI when available. If you cannot detect any, ask the user for the identifiers they can use. Never write an identifier you have not confirmed is available. The aliases `inherit-parent` and `auto` are always valid even when they are not listed.
+## Detect capabilities and load current choices
 
-### 2. Load current state
+Inspect the active delegation service's live model catalog, provider identities, and supported options. Do not assume that a model selectable in the composer is accepted by every worker tool. If there is no catalog, use `inherit-parent` without asking the user to supply model IDs. If there is no delegation tool, record that workflows run sequentially in the current session.
 
-The default role-to-model mapping is the rule shape shown in step 5 below. If `.agents/pstack-models.md` already exists, read it and treat its `# budget` line and role values as the current choices. Otherwise start from those defaults. Drop any role line not present in step 5 because it belongs to a retired role.
+Read an existing `.agents/pstack-models.md` and preserve explicit choices that are available. Mark stale IDs and unsupported options instead of retrying guessed versions. Show retired or unknown role lines before removing them. Role labels may contain commas; split each role line at its first colon, then split only the value into panel entries.
 
-### 3. Budget, map, and confirm
+## Choose models and reasoning effort
 
-**Ask for a budget.** Prefer the harness's structured user-input tool when available. Offer these four choices and name the current budget when the model map records one:
+When the user has not already specified preferences, show current choices and offer to keep session defaults or select from the confirmed catalog. Use the harness's structured question tool when available, otherwise ordinary text. Do not block a task on optional setup.
 
-- `unlimited`: keep default efforts, up to max.
-- `large`: xhigh reasoning.
-- `medium`: high reasoning.
-- `small`: medium reasoning.
+The budget presets request these efforts: `unlimited` requests `max`, `large` requests `xhigh`, `medium` requests `high`, and `small` requests `medium`. Offer only levels the selected model supports. If a requested level is unavailable, explain the mismatch and keep that choice pending. Do not silently downgrade it. The default is `session`, which preserves the current session settings.
 
-**Apply it.** Build the working table from the skill defaults on every run, preserving roles customized by model family, list membership or order, or alias (`inherit-parent`, `auto`). Do not carry over effort reductions from the previous budget when rebuilding default entries. `unlimited` leaves the rebuilt table's efforts unchanged. `large`, `medium`, and `small` set the effort token of every real identifier, including panel entries, to `xhigh`, `high`, or `medium`. The effort token is the last token, or the one before a trailing `fast`, on the ladder `max` > `xhigh` > `high` > `medium` > `low`.
+Model IDs are opaque. Never encode a budget by adding or replacing an ID suffix. Store effort separately as `@<effort>` on a role value, or use `default effort` for entries without a suffix. Pass it in the delegation service's documented options field. `inherit-parent @high` inherits the model and requests high effort only when the service can apply it.
 
-If the result is not detected, use the same model family's detected identifier with the highest effort at or below the target. Otherwise mark the role as needing a choice. For example, `small` maps `claude-opus-5-5-max` to `claude-opus-5-5-medium`, and `grok-4.7-xhigh-fast` to `grok-4.7-medium-fast`, only if those identifiers are available. Do not invent effort suffixes for harnesses that expose reasoning separately or do not expose it; mark those roles for an explicit supported choice. Leave `inherit-parent` and `auto` unchanged.
+Each panel entry creates one worker. Three `inherit-parent` entries mean three workers on the same model, not three providers. `arena cross-judge pool` supplies choices for one judge. `swarm workers` supplies the worker default unless a race explicitly assigns models.
 
-**Show the roles and confirm.**
+## Validate and write
 
-Show every role with its current model, marking any real identifier not in the detected set as needing a choice. Also list any role lines dropped as retired. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto`; both mean to use the parent chat model. Prefer the harness's structured user-input tool when available. For panel roles (arena runners, architect runners, interrogate reviewers), one subagent runs per list entry, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects a model family different from the parent's when possible. `swarm workers` is the default for every worker unless a race assigns another model per arm.
+Every explicit ID must be confirmed for the chosen provider and delegation service. Validate requested effort against that model's option descriptors. If a configured model is unavailable, explain the fallback to `inherit-parent`. If the user requires the unavailable model, leave the requirement unmet and do not claim setup fulfilled it.
 
-### 4. Validate
+Write the following role shape with the confirmed choices. Keep a budget comment when a preset was selected. Use `default effort: session` unless the user requested a supported effort. Do not copy credentials, service tokens, or machine-specific paths into the map.
 
-Every real slug written must be in the detected set. `inherit-parent` and `auto` always pass. If a chosen real slug is not available, stop and ask again.
-
-### 5. Write the rule
-
-Write `.agents/pstack-models.md` with a `# budget` line recording the chosen label and target effort, and one line per role, using the same labels poteto-mode uses. Overwrite the whole file so re-runs stay idempotent. The budget line records the requested preset; confirmed role values record any availability fallback or explicit override. Shape:
-
-```
-# pstack model configuration. One line per role. Delete a line to fall back to the skill default.
-# `inherit-parent` or `auto` uses the parent chat model. Alias entries in a panel list still count toward its fan-out.
-# budget: unlimited (max)
-feature, refactoring: grok-4.7-xhigh-fast
-bug-fix: grok-4.7-xhigh-fast
-perf-issue: grok-4.7-xhigh-fast
-hillclimb: grok-4.7-xhigh-fast
-judgment and prose: claude-opus-5-5-max
-hardest tasks: claude-opus-5-5-max
-how explorer: grok-4.7-xhigh-fast
-how explainer: claude-opus-5-5-max
-why investigators: grok-4.7-xhigh-fast
-why synthesizer: claude-opus-5-5-max
-reflect tooling: gpt-5.6-sol-max
-reflect judgment, divergent, synthesizer: claude-opus-5-5-max
-arena runners: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
-arena cross-judge pool: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
-swarm workers: grok-4.7-xhigh-fast
-architect runners: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
-interrogate reviewers: claude-opus-5-5-max, gpt-5.6-sol-max, grok-4.7-xhigh-fast
+```text
+# pstack model configuration
+# auto and inherit-parent use the current session model.
+# Each panel entry counts as a separate worker.
+feature, refactoring: inherit-parent
+bug-fix: inherit-parent
+perf-issue: inherit-parent
+hillclimb: inherit-parent
+judgment and prose: inherit-parent
+hardest tasks: inherit-parent
+how explorer: inherit-parent
+how explainer: inherit-parent
+why investigators: inherit-parent
+why synthesizer: inherit-parent
+reflect tooling: inherit-parent
+reflect judgment, divergent, synthesizer: inherit-parent
+arena runners: inherit-parent, inherit-parent, inherit-parent
+arena cross-judge pool: inherit-parent
+swarm workers: inherit-parent
+architect runners: inherit-parent, inherit-parent, inherit-parent
+interrogate reviewers: inherit-parent, inherit-parent, inherit-parent
+default effort: session
 ```
 
-### 6. Confirm
+Re-running setup preserves supported explicit model choices, panel order, and requested options. Write the whole agreed map so reruns do not duplicate lines. Deleting a role restores `inherit-parent`, or three inherited workers for a panel.
 
-Tell the user the model map was written. Re-running this skill updates it.
+Report the map path, any unavailable capabilities, and whether review panels have model diversity. If the project lacks a way to prove real behavior, offer the [create-verification-skill](../create-verification-skill/SKILL.md) workflow once.
 
-### 7. Offer a verification skill (optional)
-
-Check whether the project has a way to drive the real app for proof (a `verify-*` skill under `.agents/skills`, or an existing harness). If not, offer once: "want a project-local verification skill, so agents can drive the app the way a user does and prove changes work? I can generate one with /create-verification-skill." On yes, read and follow `.agents/skills/create-verification-skill/SKILL.md`. On no, move on without pushing.
+If concurrency, retries, parsers, unsafe code, or important invariants warrant checking beyond examples, offer [create-formal-verification-skill](../create-formal-verification-skill/SKILL.md) once unless the project already has such a skill. This is optional and does not block setup.

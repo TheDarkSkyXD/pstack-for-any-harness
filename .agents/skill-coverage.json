@@ -1,0 +1,564 @@
+{
+  "schemaVersion": 1,
+  "hashNormalization": "lf-for-text",
+  "skills": [
+    {
+      "name": "architect",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "eb4cff1ad699e2a521fead6f4fa03a79410c1220e81de86ae309b99a9c98b170",
+        "references/design-red-flags.md": "d0e639e4cc588ec865f930d3a4111faad60987ae36925917e319d7ceca7c69ce",
+        "references/rationale-template.md": "3bd76d4286a288b55a195cf786f9a25632b9f5e362271c006e8ce16e66bdc97b",
+        "references/runner-prompt.md": "21dd5314aab778c5007228027a4591d97693fbec6ab86524037772b63f40948e"
+      }
+    },
+    {
+      "name": "arena",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "09be1e31e48b5897ce5d9705bb56923121aba21663c34acf3b45c780daad2067"
+      }
+    },
+    {
+      "name": "automate-me",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "2c30db098d007e0063571e9b1f880abd7e8ffb62769853d26d6c267c4ff2bc06"
+      }
+    },
+    {
+      "name": "babysit",
+      "status": "added",
+      "files": {
+        "SKILL.md": "a5cf2cb24ab1254b8c6809e2661b729c46fb1cc08e9deedea84d8f2d99cc3860"
+      }
+    },
+    {
+      "name": "benchmark-checklist",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "2a83655b2fbbcfcdaf54b2770ff102e4fed3a3af7e66144e528cfdd933d82120"
+      }
+    },
+    {
+      "name": "blast-radius",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "a87ad67947294aa8cea68e7d66aac73eb16939677c838139d4441ec1d6e5d83a"
+      }
+    },
+    {
+      "name": "bro",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "8b822d47b9299627f5e4fe42684a031105792c8531443da1ae3423adfa2de96f"
+      }
+    },
+    {
+      "name": "correct",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "528600b261bc6756580cf4e3c2333059f539c6fbae79b2682f5001d460ffaeb1"
+      }
+    },
+    {
+      "name": "create-formal-verification-skill",
+      "status": "added",
+      "files": {
+        "SKILL.md": "f7847daf96d18089ed0dec918df833f602a6723fd06cf7053910168eaa925be2"
+      }
+    },
+    {
+      "name": "create-verification-skill",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "e23b59a8fdd6b6fba01ecf7b45890cb006e4d5ad211545bbdf527e1a1954a715",
+        "references/feature-map-example/README.md": "cb7bd782cf89968a4ba3d58a5151db837430db92d19a6f52a906973b77b516ba",
+        "references/feature-map-example/create-note.md": "644a44c74f35d38c2feb7cd05a0121fdebbb623e8dc376c185b565a581d1ccf7",
+        "references/feature-map-example/search.md": "6e87b9e7f2791a7776ba1bb83f371cd285c306c67f19d245cc4dd6ca3015c823"
+      }
+    },
+    {
+      "name": "deslop",
+      "status": "added",
+      "files": {
+        "SKILL.md": "f6ad6ae446be8dbbcad2c3300176f508c7315251039686b23fcd00458c5898f5"
+      }
+    },
+    {
+      "name": "figure-it-out",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "dd48a0c4d5cca1a7384a2fdaa23ae022cdbae9e889ba78047da738fabf0390df"
+      }
+    },
+    {
+      "name": "fix-ci",
+      "status": "added",
+      "files": {
+        "SKILL.md": "22743448b662eeca6e868b65bf1ff20cdd976e0ae04150b1238355a2a9712c38"
+      }
+    },
+    {
+      "name": "fix-merge-conflicts",
+      "status": "added",
+      "files": {
+        "SKILL.md": "00c50c543f1c364009279385a8506dba7655353b57777c68b47239d5234eb8d1"
+      }
+    },
+    {
+      "name": "get-pr-comments",
+      "status": "added",
+      "files": {
+        "SKILL.md": "82c4a9f7ff9b915407b26d82ebd50fedca654d843a71d1804c95b2bae07303a2"
+      }
+    },
+    {
+      "name": "how",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "f03b997d2217ca6ca82153db1532861392c2f36eabdb64690e40b09c1b5923a6",
+        "references/explainer-prompt.md": "ddb89cebefc24e2b54517a331aedfe045b6971e101f45c71b8cef4cccff45bff",
+        "references/explorer-prompt.md": "6300128385ee940fd42ecb84b0e623435440a2dc283eae54ee4a52ba56947ba1"
+      }
+    },
+    {
+      "name": "in-your-own-words",
+      "status": "added",
+      "files": {
+        "SKILL.md": "292b1f5b008a78be49830f02f8bc04be7bf0df50e66d0143138f244f2b47a38a"
+      }
+    },
+    {
+      "name": "interrogate",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "24531e8c882e97887d62dd5492a6b916fce14728235992272a9cae4eda1017d4",
+        "references/code-quality-review.md": "79162fda183eafd40d51661fbb5e151c7ba250f89e506ba17f5bd135dcbd50a8",
+        "references/lead-judgment.md": "355f5195a76bc75a655125292369f2a8231a2b61fabe5188d8f1386060922b87",
+        "references/reviewer-prompt.md": "f6005cc2b535006fca97a96c5bfda49df57312eedf1ffd8d1aaaf3eb33817c25",
+        "references/rubric.md": "0f9c6bdb0b96e26dbde5f6407f417e0c02f54080e7a1268d8994f3c3ec6c5ac0"
+      }
+    },
+    {
+      "name": "ketchup",
+      "status": "added",
+      "files": {
+        "SKILL.md": "e53096e76c7469e0337bfc8becc8be0c841cf012a4880ec55a520c1b89d8885a"
+      }
+    },
+    {
+      "name": "maintain-formal-verification-skill",
+      "status": "added",
+      "files": {
+        "SKILL.md": "f5a52c9c3f4f341ecdba8e951dd8954d85cd911622c538ad19a3cda4241c7415"
+      }
+    },
+    {
+      "name": "maintain-verification-skill",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "9087ea475564e4e6ec9c2bf7557a367db4cb7b7693e74d1fe3d6a47ee450b173"
+      }
+    },
+    {
+      "name": "make-pr-easy-to-review",
+      "status": "added",
+      "files": {
+        "SKILL.md": "efc91b7d0110cf76b8967cbe5b2952d009032ab92235b0c5a8253c545781e20d"
+      }
+    },
+    {
+      "name": "no-comments",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "5e5f5c40b656d1e6dccd9ec1254c2c55f7b7c065e1470608bd5e0aa25f998083"
+      }
+    },
+    {
+      "name": "poteto-help",
+      "status": "added",
+      "files": {
+        "SKILL.md": "33efca9a79a6f210b7bdc144744948e0fb6d1e98290593b42f9af6d2c76625ca",
+        "references/prompting.md": "463f450c44a60afd001a2f69fdf8a5dea174351f339369b12ec3c41515e564d3",
+        "references/recipes.md": "1c97a4a6f3389fa34da45a8c848609b59dac61001788d21bfb8ff0a01bfb2e18"
+      }
+    },
+    {
+      "name": "poteto-mode",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "1168cda4c3aa5eb4e83c97590c2f6e637d442f512e6896534de9cb3c702326c4",
+        "playbooks/authoring-a-skill.md": "aa3529776ad6ee81e540fdcd8cddf1b9b7df8c0b79bcc7ab0d8e01b7982af57f",
+        "playbooks/autonomous-run.md": "8cdd0513df115afbe52e674a96bded1461eb8bffa97dbe2874e75c8daff801b4",
+        "playbooks/autopilot-full.md": "930b2424a337f4dd3664a0bf0fee97b7d04a48f6fdd010c53d43a7b177f646a6",
+        "playbooks/autopilot-stack.md": "4666be1c4dc825faa321a2e6edae26af6f41a1a5646ad6b4c67d750693704cd5",
+        "playbooks/babysit.md": "9a0b25dc6f223ce8af3ab5631dc76de9dd2f702ac2e2ea38903b4ca41aee8ad2",
+        "playbooks/bug-fix.md": "c263ce5d9507e91fec82cdaa7d7fbbb29dce37fe4abfe363c210dcb155c4f691",
+        "playbooks/eval.md": "1aedb2cd444cb1386e9a50c119baa3224b5884bdb335f417daafd2d7b3086629",
+        "playbooks/feature.md": "2f72f42b4dfe9e42251aeced5357c61880d7a8e1669546f4b2dc12234430511a",
+        "playbooks/hillclimb.md": "ccb55fae261a825736848bf565c0230575c8683d390fd8ccc7bc61c827770b93",
+        "playbooks/investigation.md": "dc66bcf6af3a074fc7f67aa5e12b93ef571a4fb4d8e17f2f1af5ae5359f42e46",
+        "playbooks/multi-phase-plan.md": "d8d385c8a414ff2809212921506acf91b2017ef8f828e367e1dffbb70bf2d1f1",
+        "playbooks/opening-a-pr.md": "cc0957c7ccfdd1a7a4f255cb730f5d7e4f43c0fcf38a79689dfa5f34044ee526",
+        "playbooks/orchestrate.md": "ffb59d99fe90186ca8c03a53d5d26394244933d1e152cd6a91e7541e62d079be",
+        "playbooks/pause-safely.md": "2fa4812aebb034e8845752b014614b1a45331d1d380c07e9321b849cd520805b",
+        "playbooks/perf-issue.md": "23a8192d8234b21c18c8c744fb794cab2d990367bfa9a297e0bb31fbd4a6a5ec",
+        "playbooks/prototype.md": "1eb3c6ef0a6db34d42eb9cf1064f988d21e0d11bddd1e7b606c765d3634a478b",
+        "playbooks/refactoring.md": "e941a406d33eccbefc2f9a86643a86b19e31c574fd7a031e59a243728b4a514c",
+        "playbooks/runtime-forensics.md": "2b333f1d6f75915d06259b7a6d488ce754adf5d2b9c01acf4e1fda62c8f0e166",
+        "playbooks/session-pickup.md": "7d9a4fe6df0f6e50da23ec51e1fe90acc10893497da0176a054c8bcac9b71177",
+        "playbooks/shipping.md": "73a4e30b86b94527e80496aa3e2e52db24746035734be0745e57162a3b3ca603",
+        "playbooks/trace-forensics.md": "a2d5e20b544835755407b9bdd945e2b595d2e5f826b44c438cbadf92e7efd797",
+        "playbooks/visual-parity.md": "6881b42014302942de137eabed12174c2ab935cc509f8268189f41983ef467a3",
+        "playbooks/worktree-cleanup.md": "86e89744c481ea8e6f907fcaf1d6a8ed65d3737e7bcc446b4adb7fd8f4470515",
+        "references/bugbot-triage.md": "b2d146c770d8d3593e1ef3d77b668039b8e1f78093ea1a86f1d45d7f99614309",
+        "references/harness.md": "42ec5ac26eebc3012d34bfb8e2fe177dea91c013e58ff05e064f21bb0e2f4e3a",
+        "references/merge-safety.md": "042822ac4e6b756a113adf5148a8a9205b5f6898ac026b9c64f278c3804733e4",
+        "references/plan.md": "51f927cfaa3eb0e99c1d095e24a43eb317de5a7fc4e8db036957adb859bdec29",
+        "references/program-checklist.md": "7ee07a767907429696ef0c25e2d9947c73b7789f953a4d188353ba1b33871856",
+        "references/resume-storage.md": "0887c988c342329a407f79d158c964d894286e3046ef8a6fb90f71dc130ae45d",
+        "scripts/.prettierignore": "6fa188dc9628ff0e444758f39bff16f95741ca402d9333ffd662dd0f5162bdb0",
+        "scripts/.prettierrc.json": "906f56feaffe5315dfdbe4c23ba440c3cb6cc56b9c84a20a5c692d180a62af65",
+        "scripts/bootstrap.ts": "020120f37f75ca776c3db8941b8a0d1407738012a534fe0651c83c907b0ea74d",
+        "scripts/bun.lock": "667d9cf7222e9aae3fa42a4be383e657784216e9df115da02227fbc5ac7bbe46",
+        "scripts/check-plan.mjs": "9a17899ec7dc4d001bbaafe886fc5942333ab8df06d66608adf3a0bf23be102d",
+        "scripts/check-plan.test.ts": "391978234e88e2ca175357ee7edb53970aadfc752845b438fb087eb89d025e72",
+        "scripts/check-playbooks.mjs": "12ded3c52ee2647372e515c72293a73dc8b4de968a10ec89b6e5c924daa4b98a",
+        "scripts/executable.test-helper.ts": "d4637f22c601666e788d0e968dcdaff68e9d2058bffbac668f56e2e7f1ebb87b",
+        "scripts/orch/orch.test.ts": "e3e33a8284079ac72ed04b26f95e9aa96b901f65650010bf91c2152af3e92c7f",
+        "scripts/orch/orch.ts": "47c92c57e8276616d8de94665a126bd832e748036afa8d0ffdbacb7946decb5c",
+        "scripts/orch/store.ts": "d4a5cf9388b3a5e7cfe779efee344a867f7e4f1f33f0c7c22f36c6642ba6417f",
+        "scripts/package.json": "cc1063a7271d876c995b2a8c7926a7c02f208fb8610e7e7b6ff81b1b28dd3f6a",
+        "scripts/resume.mjs": "1fadab710d2d0fb60c75a98639f14a18b198faeb8deb234f552da2a83595e5e3",
+        "scripts/subprocess.test-helper.ts": "3addd0b5076c9628e10ac0dd65dbddf79f64a9112668621ec787d9362a54c455",
+        "scripts/tsconfig.json": "151bdff404757dbc9363bd5756bbf0c816d45e013daf7cdf9b173c3e0f27b83d",
+        "scripts/watch-pr/cli.test.ts": "cc5fda88891e0921b6612200cc89d4aebb6de0a3a81d61298786ad6807a5c0e9",
+        "scripts/watch-pr/cli.ts": "62cdefdd6390cbf17c5b9ebc91e203e3d0da742899522bee0456a57851ef0106",
+        "scripts/watch-pr/deadline.ts": "943b304e4625da90e4f6e0774e167093fb37f4f60360a2f220d586f070d2d1a3",
+        "scripts/watch-pr/fakes.test-helper.ts": "15866f3205190026465d5deff238039b38d29fc009440e44ebdd81ebf5fb509f",
+        "scripts/watch-pr/github.test.ts": "72943b664b38e267d7fa1e4b7f2d6410b71da35f47682197980d22ddc7bdc2ef",
+        "scripts/watch-pr/github.ts": "cb7c15ebb2be265c296bb9ac566de428c825754b7d0ef2aef17d9e900c182a6a",
+        "scripts/watch-pr/integrity.test.ts": "64ad533a896bb7771ddfc10af62304b8f3c4ffcc92ab077a0865d8ca4c1387bc",
+        "scripts/watch-pr/landing.ts": "b6a1ac639a894e34f83fe5989522e8791d1e116370bf46e8c43c1b8ed856cb56",
+        "scripts/watch-pr/live-merge-safety.mjs": "bfd30c63243845e509b56309553840d9411fa7f7e971b463fec6909ca3dfa884",
+        "scripts/watch-pr/policy.test.ts": "a24f4e221c5175e885dde40311e82c2372f7f8fff7c458825e48b31ec885599f",
+        "scripts/watch-pr/policy.ts": "243e3460d140bb0852d12fee6c962a9de1260de2a4e0bdb520dcc9ce174ee966",
+        "scripts/watch-pr/render.ts": "38453896353f68c6edbbfd5c076449748621588dfb1c2ea47697de797d4c3175",
+        "scripts/watch-pr/ship-pr": "16eebf752572625a559fe214c0463c0775d48233b4e5cec3c5af20de36926490",
+        "scripts/watch-pr/shipping-cli.test.ts": "de7ae359c023461dd7f2432607ef995106ecdaebe5e6ffee8515d3194b6136a2",
+        "scripts/watch-pr/shipping-cli.ts": "829223fdcfadee7eb61cc76e14648505d79e45681ec6c3635bdee58f6cd2b128",
+        "scripts/watch-pr/shipping.test-helper.ts": "0da25dc2ff9f2e4c384b1c8123aa9a04863f48a370dc799c11ae3e426b9ab021",
+        "scripts/watch-pr/shipping.test.ts": "16ccd518f41377687cab0f7d11302d5702a9c08bc98bd809b30b7f49dedd1eb0",
+        "scripts/watch-pr/shipping.ts": "dbb264e429b2fe7958bea15094608fc75431ec642e2e3e1163462b99c2802cbf",
+        "scripts/watch-pr/transport.test.ts": "7ae48dee7e64f6b07e3670c5942acd02a62b8b12802fe99ce09561189f19c24b",
+        "scripts/watch-pr/tsconfig.json": "1ecccc72320b086c63ce3f73c959896fd747363e63553b3b1136296ea4069e45",
+        "scripts/watch-pr/types.compile.ts": "31e13df987dd28487ce8ef090d86417183aedc10b499d916a5d60977e2ea4d93",
+        "scripts/watch-pr/types.ts": "10fafeef4dc915c201d28a5d182dfa93193edc37fb0f642858b8cba94527d271",
+        "scripts/watch-pr/watch-pr": "d955603be6cc0e8b8ffcec722f635192b2261410b1f2929abea94480e47eb5d4",
+        "scripts/watch-pr/wrapper.test.ts": "f58c4b952ba39f30c9fad5dd150379bd49c7c67be3d44e6c324313d9b2ed633f",
+        "scripts/worktree-audit.mjs": "a4268943be7cf9622de26f8b872daa5cc36bff6494899dee1b4f27db447a0109"
+      }
+    },
+    {
+      "name": "principle-attack-the-premise",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "0522e1fd649a8b3dd26cda61ff52673ba8af1a3caf9314f9c6fbfead15554896"
+      }
+    },
+    {
+      "name": "principle-boundary-discipline",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "29852b3ab0e3b043c62318751f445a38fedb36f3b050e71e80aab41fb08a8b00"
+      }
+    },
+    {
+      "name": "principle-build-the-lever",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "1b8043fda811cf44a86a050d7e1a71d5cfcd172c0ae89634c7fb38f7e9380376"
+      }
+    },
+    {
+      "name": "principle-encode-lessons-in-structure",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "e66d95bd954a1e8ba298bc451ba1e9190c758f6d77c240540bedf8f28c895694"
+      }
+    },
+    {
+      "name": "principle-exhaust-the-design-space",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "67e7e29ab4f484bfddcac55ece4d70f6efc25ccbf91de7de31fcec385f9f059e"
+      }
+    },
+    {
+      "name": "principle-experience-first",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "3013367ce42fabb55799ffbcc51ad20b2ae7ec1b898bad4ac4ceaa2f093edbe1"
+      }
+    },
+    {
+      "name": "principle-explain-the-number",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "0a5cb3579a30e4da9d1635f5ceb11f773e551ec8626ac9c38b5db3985d3ac26b"
+      }
+    },
+    {
+      "name": "principle-fix-root-causes",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "8836ea987a09ee7edf9ec75a64986cbd1e6976f499408af208d6d6fc18f420a4"
+      }
+    },
+    {
+      "name": "principle-foundational-thinking",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "e69eea824d81c4bb32cbcdb26513bf964882daeeb647bb99210978e86bec1a49"
+      }
+    },
+    {
+      "name": "principle-guard-the-context-window",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "7a0a9540d4c0e8053ace79628d0a493444a82d1bbe1d8e94c8e561606c3d2912"
+      }
+    },
+    {
+      "name": "principle-laziness-protocol",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "f45159ad7ea5f01a08d364897307f69ca18fa57b87d6ed6b89ca222a2388bf7d"
+      }
+    },
+    {
+      "name": "principle-make-operations-idempotent",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "c984c7e6fd0f8c061421a315cf83e92eaacd1867e7b9064fd3c4ca5b0224345f"
+      }
+    },
+    {
+      "name": "principle-migrate-callers-then-delete-legacy-apis",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "388e9cbc9e52bd72d9044d7e37126bd3355c4e8f1188447e2a6850fe4fc549d7"
+      }
+    },
+    {
+      "name": "principle-minimize-reader-load",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "d44ded81ac7cfc194dca65c9943a55fe8a058660485049a6e607e6bdf5d70738"
+      }
+    },
+    {
+      "name": "principle-model-the-domain",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "b50a9ca53a9cd445b6804ff4eeb2904bba5e9d502a8e51c0ebd8cbe830c8be26"
+      }
+    },
+    {
+      "name": "principle-never-block-on-the-human",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "90cd48f4082367fe70fc1659fec5a8d0e76a40cb7f9be4797b4b460cec28a4dd"
+      }
+    },
+    {
+      "name": "principle-outcome-oriented-execution",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "922ade1be5f671575b3c93367c3d08c9dbb2f7444a42bacbfb834656724d61ac"
+      }
+    },
+    {
+      "name": "principle-prove-it-works",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "06c438b9a387ba7d07b5ecd256b5c670c23e19ec8b1c00004183287d6c29c7c1"
+      }
+    },
+    {
+      "name": "principle-redesign-from-first-principles",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "b3ac6bc1c707aa8ad1a331851ad71aeb48f179136907ab2015f34881c674d056"
+      }
+    },
+    {
+      "name": "principle-separate-before-serializing-shared-state",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "8b1770a78e89adb0076a30aba568d0a9fe3072048a96d908eff1b20394161d60"
+      }
+    },
+    {
+      "name": "principle-sequence-verifiable-units",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "c3de134a60c75c9fed202fbe4a8f003f1737692c8d170d04dfd9c9ee99b8cdb9"
+      }
+    },
+    {
+      "name": "principle-subtract-before-you-add",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "65fa4e1a2a630040eb0abbcfeaf0e82241fd968443021b535f94b4b6d4b7aa0f"
+      }
+    },
+    {
+      "name": "principle-test-behavior-not-implementation",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "3ee3b65774c30617fc741a33a46f211c60e32d60492801c82ba768021c0db123"
+      }
+    },
+    {
+      "name": "principle-type-system-discipline",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "1fa13e29e277c87fbd25e87bc77145bfe539bef12e529fd20809f324e0d7a2d3"
+      }
+    },
+    {
+      "name": "recall",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "c30a8ac7e9aa2a2c5c184d6ff7ce373c440a9c7a5643ea20041532e8170a8ff5"
+      }
+    },
+    {
+      "name": "reflect",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "032817a3472881f8fd6bed165afc6b07c1e67ef66e65bc229b0d6ab0a6e76dbc",
+        "references/divergent-reviewer.md": "049a06d7115a30911bdfb115a722ff0ddbb4d9dd6e1b555d62669e4169d8cfc7",
+        "references/judgment-reviewer.md": "98657e9168a042743e7f2ab1be32efc4a2ff1f8424a3a8d190653795444e49a7",
+        "references/synthesizer.md": "0192c3302f001e3204fb9d3296ba1d252cd2f80403c6865e6e0bd0facdc70f90",
+        "references/tooling-reviewer.md": "780dbaec8f245e424546a76a70d7bc16df0b95046a9c8bb580c27653dcb0f46c",
+        "scripts/find-transcript.mjs": "0358504868865c344ece23977355d5d35c88640a5c16b778a1af5be0ab8cd969"
+      }
+    },
+    {
+      "name": "setup-pstack",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "609c719aeaa2e1bbacd7c97939e7e42ed93aec5c514a7b78fbfbdeb5171f415e"
+      }
+    },
+    {
+      "name": "sharpen",
+      "status": "added",
+      "files": {
+        "SKILL.md": "29cb973e20503d316224b94378482885e18a5c84ae84df7c5687e740e3f8702f"
+      }
+    },
+    {
+      "name": "show-me-your-work",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "957bcd5ec2784ef8df3f5eccebfbf12d0b79cd9763479406d0cfaab116075f09",
+        "references/decision-log-template.tsv": "e41f14876ec851a603b03a168c4ce63b46c4cd2588b8e4668a8c988d9b37ffa5",
+        "scripts/log.sh": "68acbc477f9d2fd5eaf86aef436e00cb58cf9745e5d5ec4560fb9a9c12a0a9d6"
+      }
+    },
+    {
+      "name": "swarm",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "4bc666d3f1b9d6742640342492398b8e20c70a10ef6a5d9818ab31e49aa717c1"
+      }
+    },
+    {
+      "name": "tdd",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "0843b21abd7fad7f5bca4ed8a8b7a0a8f64379df3cdece871329a43ac8c9f104"
+      }
+    },
+    {
+      "name": "teach",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "c7b19d8f6c40802b26ac6b15e44aaaba321e55c5b3cac9cafb1d8589cc567cb0"
+      }
+    },
+    {
+      "name": "technical-writing",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "b83d616480d74381acdc5accb65a409c01095b71abc7dc02b6cadc496138dc81"
+      }
+    },
+    {
+      "name": "thermo-nuclear-code-quality-review",
+      "status": "added",
+      "files": {
+        "SKILL.md": "d6706891945a0ff668df6280b48f1d46c1bbe03da2e73240926194cce8de788e"
+      }
+    },
+    {
+      "name": "thermo-nuclear-review",
+      "status": "added",
+      "files": {
+        "SKILL.md": "fcf4c9cfcd06a69f47dd438664dcc6cba9a406fcbef7871b335041cf6a0246d2"
+      }
+    },
+    {
+      "name": "thermos",
+      "status": "added",
+      "files": {
+        "SKILL.md": "50d5962c2486df2655c692643b0e3b45136f23446dc385eb80095bba22cc02ba"
+      }
+    },
+    {
+      "name": "typescript-best-practices",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "7877a2c8c159c12bfa7c7d8eb13c07cb84a049f00a54bb3e7f84c53a9d7177c5",
+        "references/patterns.md": "d8700f07fda6b45a1b1a2cb686ec833b625fd1a49ec31c811778d416c35e777e"
+      }
+    },
+    {
+      "name": "unslop",
+      "status": "reviewed",
+      "files": {
+        "SKILL.md": "290a10a90e52f080fdf0f225f043088990b5cd8d8b8307c800a91cfeb1568aa4"
+      }
+    },
+    {
+      "name": "what-did-i-get-done",
+      "status": "added",
+      "files": {
+        "SKILL.md": "6b7c7a7ee8bdc941c8ed1e5a0bc9b715b901923775c295176d8f85a766341625"
+      }
+    },
+    {
+      "name": "why",
+      "status": "updated",
+      "files": {
+        "SKILL.md": "84f21cc4cbc168e9c9fdac00b284de1a5ee5d8abba5222d897ca190a7d9ab48f",
+        "references/epistemics.md": "98fa3a42c087fe73b0078e740d3df02fc7cfbca56d714cf09825da358a23b643",
+        "references/investigator-prompt.md": "0d374a18311628e62bf49893213aa31fc53f8111f5a8aceb5b9c63dad2354c9d",
+        "references/source-playbook.md": "9ae9dcb9d09111c9facc68510331c5aba4aed9b1b057314ff1fc0e166ad3993a",
+        "references/sources/code-archaeology.md": "8c14aa382f0de40829b2668d43e3f54814480bb93a486c9282ada4003f6b9dbd",
+        "references/sources/databricks.md": "236ede7aab6454662a992db088a5393537a5233a4c26719c93188f9e174488f6",
+        "references/sources/datadog.md": "b139faac5dc11b8f26c8255dce6033c1a6ac143b038d3dd103f2034c5dbec9cd",
+        "references/sources/incident-postmortem.md": "a899470f05f86029630a13a2696491cc708ca7b56a6e822a69ff6e954d6ff8cf",
+        "references/sources/linear.md": "01304e7f1badfcfb78babbb0edcadeb3cc8dd3f713793420cdff24ba190f907c",
+        "references/sources/notion.md": "3bcfa695c49dfad4ac036d5d7181c12585f55ac04f1936198d16ab75a2788997",
+        "references/sources/sentry.md": "6f292bc4fb1548e956f95e1900b9481abf5134254419f1cd9edec95428c82d73",
+        "references/sources/slack.md": "58fee61d024b3700b407e7acbed367944720ff05adfddb6954d36c88368f3ba7",
+        "references/synthesizer-prompt.md": "07cafec27a3d6fa9650d162d7a2c8e97a5262d52203592803c5d6a91c5036594"
+      }
+    }
+  ]
+}

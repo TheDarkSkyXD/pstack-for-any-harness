@@ -5,6 +5,10 @@ description: Spawn three parallel review subagents over the active transcript, s
 
 # Reflect
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 Mine the current conversation for durable learnings, then route them into skill edits.
 
 ## When to invoke
@@ -15,33 +19,27 @@ Invoke when the user says "reflect" or "/reflect". Skip when the conversation is
 
 ### 1. Locate the active transcript
 
-The parent locates its own transcript before fanning out. Use only the workspace-scoped transcript or conversation-history interface exposed by the active harness. Never search another workspace. If no transcript interface exists, write a tight digest of the session and pass that instead.
+Use the active harness's workspace-scoped transcript or conversation-history interface. Never search unrelated sessions or assume another provider's JSON schema or private storage path.
 
-```bash
-ls -t <agent-transcripts>/*.jsonl <agent-transcripts>/*/*.jsonl <agent-transcripts>/*/subagents/*.jsonl 2>/dev/null | head -10
-```
-
-Three transcript layouts: legacy flat (`<id>.jsonl`), current nested (`<id>/<id>.jsonl`), and subagent (`<parent>/subagents/<child>.jsonl`).
-
-For each candidate, read the first JSONL line and check that `message.content[0].text` contains the conversation's opening user prompt. Take the matching path. If no path resolves, write a tight digest of the session and pass that instead.
+If no transcript is accessible, write a factual chronological digest containing the user's prompts and corrections, tool calls and their results, and files touched. State the missing history. Exclude diagnoses, suggested verdicts, or causes; the reviewers judge the evidence independently.
 
 ### 2. Spawn three reviewers in parallel
 
 Launch three general-purpose reviewers together through the active harness's delegation interface, with `model` set as below. Give them connector access for context lookups (tickets, chat threads, and observability traces referenced in the transcript) while the prompt forbids file writes. The parent applies edits.
 
-Each reviewer and the synthesizer use a role line in `.agents/pstack-models.md` and a default. Set `model` to that line's value, or the default when the map or line is missing. Leave `model` unset for `auto` or `inherit-parent`. If the active harness rejects a configured slug, use the default and say so. If it rejects the default, use the closest valid slug of the same family from its error message.
+Each reviewer and the synthesizer use a role line in `.agents/pstack-models.md`. Resolve it through [the harness contract](../poteto-mode/references/harness.md). Missing or unavailable entries inherit the current session model.
 
 | Lens | Role line | Default `model` | Prompt template |
 |---|---|---|---|
-| Judgment | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-max` | `references/judgment-reviewer.md` |
-| Tooling | `reflect tooling` | `gpt-5.6-sol-max` | `references/tooling-reviewer.md` |
-| Divergent | `reflect judgment, divergent, synthesizer` | `claude-opus-5-5-max` | `references/divergent-reviewer.md` |
+| Judgment | `reflect judgment, divergent, synthesizer` | `inherit-parent` | `references/judgment-reviewer.md` |
+| Tooling | `reflect tooling` | `inherit-parent` | `references/tooling-reviewer.md` |
+| Divergent | `reflect judgment, divergent, synthesizer` | `inherit-parent` | `references/divergent-reviewer.md` |
 
-Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings through the delegation response.
+Pass each template verbatim, substituting the transcript path or factual digest where marked. Add no focus note, diagnosis, suggested conclusion, or parent verdict. Reviewers return findings through the delegation response.
 
 ### 3. Synthesize
 
-Launch one general-purpose synthesizer through the active harness's delegation interface, with `model` from the `reflect judgment, divergent, synthesizer` line (default `claude-opus-5-5-max`). Give it connector access because its quality check may spot-verify citations. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
+Launch one general-purpose synthesizer through the active harness's delegation interface, with `model` from the `reflect judgment, divergent, synthesizer` line (default `inherit-parent`). Give it connector access because its quality check may spot-verify citations. Use `references/synthesizer.md` verbatim, with each reviewer's full output inlined where marked. The synthesizer returns a structured Accepted / Rejected / Backlog list.
 
 ### 4. Structural enforcement check
 
@@ -57,7 +55,7 @@ For each approved Accepted item, follow the Routing field exactly:
 
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): parent does directly.
 - Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): use the active harness's skill-authoring guidance and run its draft / test / iterate loop.
-- `tune description: <skill path>` (the skill exists but didn't trigger when it should have): hand to `create-skill` and run its description-optimization loop.
+- `tune description: <skill path>` (the skill exists but did not trigger when it should have): use the active harness's authoring guidance when available and verify the revised description against concrete matching and non-matching requests. Do not require an unavailable skill-authoring tool.
 - `new skill via create-skill: <kebab-name>`: hand creation to `create-skill`. Do not invent the shape ad hoc.
 
 If your environment ships a SKILL.md validator, run it on every touched skill before declaring done. Skip this step if it doesn't.

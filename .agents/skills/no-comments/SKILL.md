@@ -5,6 +5,10 @@ description: "Spawn Comment Sicko, fix accepted findings, and offer encodings fo
 
 # No comments
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 Spawn Comment Sicko. Act on accepted findings.
 
 Defer to Comment Sicko's fresh perspective.

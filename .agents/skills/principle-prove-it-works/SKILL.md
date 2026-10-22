@@ -7,6 +7,8 @@ description: "Apply after completing a task, before declaring done. Verify again
 
 Verify every task output by checking the real thing directly. Do not infer from proxies, self-reports, or "it compiles."
 
+Check actual state, exit codes, and the provenance of the evidence before claiming success. A failing probe must fail for the predicted disagreement; a tool error or missing fixture does not prove the behavior was exercised.
+
 **Why:** Unverified work has unknown correctness. Indirect verification (file mtimes, output freshness, agent self-reports, cached screenshots) feels cheaper than direct observation. Acting on a wrong inference costs far more than checking the source.
 
 Check the real thing, not a proxy:

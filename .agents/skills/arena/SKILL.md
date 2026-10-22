@@ -5,6 +5,10 @@ description: "Spawn N parallel candidates at the same task, pick a base, graft t
 
 # Arena
 
+## Runtime
+
+Read [the harness contract](../poteto-mode/references/harness.md) before following this workflow. It defines model inheritance, tool fallbacks, and unmet verification gates.
+
 Fan out N parallel attempts at the same task. Read every candidate end to end. Pick the strongest as the base. Graft the best ideas from the others into it. Verify the synthesized result.
 
 ## Start
@@ -24,8 +28,8 @@ The N candidates will receive the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. The rubric is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. Use the `arena runners` line in `.agents/pstack-models.md`. If the map or line is missing, default to one each on `claude-opus-5-5-max`, `gpt-5.6-sol-max`, and `grok-4.7-xhigh-fast`. An `auto` or `inherit-parent` entry in this line or the cross-judge line means the parent model, so omit `model` for it. If the active harness rejects a configured entry, run that seat on its family's default and say so. Families go by prefix: `claude-*`, `gpt-*`, and `grok-*`. With no family match, use `claude-opus-5-5-max`. If the harness rejects a default, use the closest valid slug of the same family from its error message. Spawn more when the arena covers multiple design directions. Use the same model N times when the work is generation-bound rather than judgment-sensitive.
-4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`), per the **separate-before-serializing-shared-state** principle skill.
+3. Pick the runners. Use the `arena runners` line in `.agents/pstack-models.md`. With no line, use three `inherit-parent` entries. Resolve IDs and options through [the harness contract](../poteto-mode/references/harness.md). Preserve the candidate count when models repeat and disclose the lack of model diversity. Spawn more when the arena covers multiple design directions.
+4. Assign output paths. Each candidate writes to its own location, a git worktree where possible, otherwise a separate directory under the host OS temporary directory, per the **separate-before-serializing-shared-state** principle skill.
 
 ## Phase B: Fan out
 
@@ -37,7 +41,7 @@ If a candidate fails to produce output, proceed with N-1 and note the dropout in
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, choose one model from the `arena cross-judge pool` line in `.agents/pstack-models.md`. If the map or line is missing, choose from `claude-opus-5-5-max`, `gpt-5.6-sol-max`, and `grok-4.7-xhigh-fast`. Prefer a different model family from the parent's. Spawn one readonly judge subagent on that model. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with the parent's reading in Phase D, not with the candidates themselves. Don't spawn the judge while candidates are still writing.
+After all Phase B candidates complete, choose one model from the `arena cross-judge pool` line in `.agents/pstack-models.md`, or `inherit-parent` when absent. Prefer a different confirmed model family when available. Resolve the choice through the harness contract. Spawn one read-only judge with the rubric and the completed candidates by path label. It scores each criterion and recommends a base with rationale. It can run in parallel with the parent's reading in Phase D. Disclose a same-model judge or a sequential self-review, and leave an independent review gate unmet if no independent worker can run.
 
 ## Phase D: Pick a base
 
